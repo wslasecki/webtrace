@@ -161,7 +161,7 @@ WA.Keyboard = {
     }
 
     // Should move to separate Markov prediction object.
-    this.recordObservation(key_string, new_node, lastNode);
+//    this.recordObservation(key_string, new_node, lastNode);
   
     // Update our record of the last node to be played.
     if(new_node != null) {

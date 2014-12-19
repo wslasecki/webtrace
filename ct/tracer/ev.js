@@ -1,7 +1,8 @@
 var prevPage = null;
-var curPage = $('#content_frame').contents()[0].location.href;
+var curPage = null;
 
 $(document).ready( function() {
+  curPage = $('#content_frame').contents()[0].location.href;
 
   console.log("On it, Chief.");
   loadInit();
