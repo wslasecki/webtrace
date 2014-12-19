@@ -156,7 +156,6 @@ function newPage(e) {
   if(newDoc != currentDoc && (!startNode ||currentLoc != newLoc)) {
     var location_field = document.getElementById('location');
     if(location_field) {
-      WA.Utils.recordLine('new page: ' + location_field.value);
       if(/mail\.google\.com\/mail/.test(location_field.value) && !(/ui=?html/.test(location_field.value))) {
         setContentLocation('https://mail.google.com/mail/?ui=html&zy=f');
       }

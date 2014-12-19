@@ -55,7 +55,6 @@ WA.Keyboard = {
    * @return Boolean Indicates whether event should be blocked.
    */
   doKeyPress: function (e, target, key_string, source) {
-    //WA.Keyboard.ActionQueue.recordAction(e, target, key_string, source);
     if(WA.Extensions.WebTrax){
       //alert('keypress');
       WA.Extensions.WebTrax.instance.keyPress(e, target, key_string, source);
@@ -78,7 +77,6 @@ WA.Keyboard = {
       target_type = target.tagName;
     }
 
-    WA.Utils.recordLine('keypress: ' + key_string + ' ' + source + ' ' + WA.Utils.getXPath(target) + ' ' + WA.Utils.getXPath(currentNode));
 
     var return_val = false;
   
@@ -90,280 +88,6 @@ WA.Keyboard = {
 
     var new_node = null;
     var last_node = currentNode;
-  
-/*
-    switch(key_string) {
-    case 'ctrl':
-      this.wa_up_tracker = false;
-      break;
-    case 'tab':
-      this.suppressKeys(e);
-      switch(target_id) {
-      	case 'location':
-          WA.Interface.focusBrowserElement('location_go');
-          break;
-        case 'location_go':
-					setBrowseMode(WA.KEYBOARD);
-					focusContentElement('always_first_node');
-					setBrowseMode(WA.PLAY_ONE);
-					break;
-				case 'always_last_node':
-	        setBrowseMode(WA.KEYBOARD);
-	        setBrowseMode(WA.PLAY_ONE);
-          break;
-        case 'wa_finder_field':
-          WA.Interface.focusBrowserElement('find_next_button');
-          break;
-        case 'find_next_button':
-          WA.Interface.focusBrowserElement('find_previous_button');
-          break;
-        default:
-	        setBrowseMode(WA.KEYBOARD);
-	        nextNodeFocus();
-	        setBrowseMode(WA.PLAY_ONE);        
-      }
-      break;
-    //case 'ctrl shift':
-    //  WA.Interface.addLanguageChanger();
-    //  break;
-    case 'ctrl forward slash':
-      WA.Interface.addKeyboardHelp();
-      break;
-    case 'esc':
-      WA.Interface.removeBlocker();
-      break;
-    case 'shift tab':
-      this.suppressKeys(e);
-      switch(target_id) {
-        case 'location_go':
-        case 'location':
-          WA.Interface.focusBrowserElement('location');
-          break;
-        case 'always_first_node':
-          WA.Interface.focusBrowserElement('location_go');
-          break;
-        case 'find_previous_button':
-          WA.Interface.focusBrowserElement('find_next_button');
-          break;
-        case 'find_next_button':
-          WA.Interface.focusBrowserElement('wa_finder_field');
-          break;
-        default:
-	        setBrowseMode(WA.KEYBOARD);
-	        prevNodeFocus();
-	        setBrowseMode(WA.PLAY_ONE);
-	        break;
-      }
-      break;
-    case 'ctrl a':
-      WA.Extensions.callPeriodics();
-      break;
-    case 'alt arrowleft':
-      goBack();
-      break;
-    case 'alt arrowright':
-      goForward();
-      break;
-    case 'ctrl n':
-      WA.Keyboard.ActionQueue.playFromQueue();
-      break;
-    case 'ctrl l':
-      this.suppressKeys(e);
-      WA.Interface.focusBrowserElement('location');
-      setBrowseMode(WA.KEYBOARD);
-      break;
-    case 'ctrl tab':
-    case 'ctrl shift tab':
-      // Let this go through for now.
-      break;
-    case 'ctrl r':
-      this.suppressKeys(e);
-      setBrowseMode(WA.KEYBOARD);
-      new_node = nextTableRow(lastNodePlayed);
-      if(new_node) {
-        setCurrentNode(new_node);
-        setBrowseMode(WA.PLAY_ONE);
-      } else {
-        setBrowseMode(WA.KEYBOARD);
-      }
-      break;
-    case 'ctrl f':
-      this.suppressKeys(e);
-      setBrowseMode(WA.KEYBOARD);
-      WA.Interface.focusBrowserElement('wa_finder_field');
-      finderBarFocus();
-      break;
-    case 'ctrl d':
-      this.suppressKeys(e);
-      setBrowseMode(WA.KEYBOARD);
-      new_node = nextTableCol(lastNodePlayed);
-      if(new_node) {
-        setCurrentNode(new_node);
-        setBrowseMode(WA.PLAY_ONE);
-      } else {
-        broseMode = WA.KEYBOARD;
-      }
-      break;
-    case 'ctrl t':
-      this.suppressKeys(e);
-      setBrowseMode(WA.KEYBOARD);
-      new_node = nextNodeTagAttrib("TABLE", null);
-      if(new_node) {
-        setBrowseMode(WA.READ);
-      } else {
-        broseMode = WA.KEYBOARD;
-      }
-      break;
-    case 'ctrl shift t':
-      this.suppressKeys(e);
-      setBrowseMode(WA.KEYBOARD);
-      new_node = prevNodeTagAttrib("TABLE", null);
-      if(new_node) {
-        setBrowseMode(WA.READ);
-      } else {
-        setBrowseMode(WA.KEYBOARD);
-      }
-      break;
-    case 'ctrl h':
-      var startnode = getScriptWindow().currentNode;
-      this.suppressKeys(e);
-      setBrowseMode(WA.KEYBOARD);
-      new_node = nextNodeTagAttrib("H", null);
-      if(new_node) {
-        setBrowseMode(WA.READ);
-      } else {
-      	setCurrentNode(startnode);
-        setBrowseMode(WA.KEYBOARD);
-      }
-      break;
-    case 'ctrl shift h':
-      this.suppressKeys(e);
-      setBrowseMode(WA.KEYBOARD);
-      new_node = prevNodeTagAttrib("H", null);
-      if(new_node) {
-        setBrowseMode(WA.READ);
-      } else {
-        setBrowseMode(WA.KEYBOARD);
-      }
-      break;
-    case 'ctrl shift f5':
-      this.suppressKeys(e);
-      setBrowseMode(WA.KEYBOARD);
-      break;
-    case 'ctrl shift f6':
-      this.suppressKeys(e);
-      setBrowseMode(WA.KEYBOARD);
-      break;
-    case 'ctrl shift f7':
-      WA.Utils.log('reset timing array');
-      break;
-    case 'ctrl shift r':
-      this.suppressKeys(e);
-      setBrowseMode(WA.KEYBOARD);
-      new_node = prevTableRow(lastNodePlayed);
-      if(new_node) {
-        setCurrentNode(new_node);
-        setBrowseMode(WA.PLAY_ONE);
-      } else {
-        setBrowseMode(WA.KEYBOARD);
-      }
-      break;
-    case 'ctrl shift d':
-      this.suppressKeys(e);
-      setBrowseMode(WA.KEYBOARD);
-      new_node = prevTableCol(lastNodePlayed);
-      if(new_node) {
-        setCurrentNode(new_node);
-        setBrowseMode(WA.PLAY_ONE);
-      } else {
-        setBrowseMode(WA.KEYBOARD);
-      }
-      break;
-    case 'ctrl 1':
-      if(WA.Extensions.WebTrax){
-        WA.Extensions.WebTrax.recordMode = 'trail';
-        WA.Extensions.WebTrax.instance.visualizeRecordings(getContentDocument());
-      }
-
-      this.suppressKeys(e);
-      setBrowseMode(WA.KEYBOARD);
-      break;
-    case 'ctrl 2':
-      if(WA.Extensions.WebTrax){
-        WA.Extensions.WebTrax.recordMode = 'heatmap';
-        WA.Extensions.WebTrax.instance.visualizeRecordings(getContentDocument());
-      }
-      this.suppressKeys(e);
-      setBrowseMode(WA.KEYBOARD);
-      break;
-    case 'ctrl 3':
-      if(WA.Extensions.WebTrax){
-        WA.Extensions.WebTrax.removeFlash();
-      }
-      this.suppressKeys(e);
-      setBrowseMode(WA.KEYBOARD);
-      break;
-    case 'ctrl 4':
-      if(WA.Extensions.WebTrax){
-        var response = function(e){
-          if(e.target.responseText && !arguments.callee.used){
-            var pathArrays = JSON.parse(decodeURIComponent(e.target.responseText)).paths;
-            WA.Extensions.WebTrax.instance.showAggregateHeatmap(pathArrays);
-            arguments.callee.used = true;
-          }
-        }
-        var json = encodeURIComponent(JSON.stringify({
-          uri: WA.Interface.getURLFromProxiedDoc(document.getElementById('content_frame').contentDocument)
-        }));
-        WA.Utils.postURL('/wa/webtrax-record.php', 'getpaths=' + json, response);
-      }
-      this.suppressKeys(e);
-      setBrowseMode(WA.KEYBOARD);
-      break;
-    case 'ctrl p':
-      this.suppressKeys(e);
-      break;
-    case 'ctrl shift p':
-      this.suppressKeys(e);
-      break;
-    case 'ctrl i':
-      this.suppressKeys(e);
-      break;
-    case 'ctrl shift i':
-      this.suppressKeys(e);
-      break;
-    case 'ctrl 6':
-      WA.Utils.log('done');
-      break;
-    case 'ctrl 7':
-      WA.Utils.log("calling Periodics");
-      WA.Extensions.callPeriodics();
-      WA.Utils.log("done calling Periodics");
-      break;
-    case 'ctrl 8':
-      WA.Extensions.resetExtensions();
-      WA.Nodes.treeTraverseRecursion(currentNode, function(node){WA.Extensions.preprocessNode(node)}, function(node){return WA.Nodes.leafNode(node)});
-      WA.Extensions.runOncePerDocument(currentDoc);
-      break;
-    case 'pagedown':
-      this.suppressKeys(e);
-      nextNode(true);
-      setBrowseMode(WA.READ);
-      break;
-    case 'home':
-      this.suppressKeys(e);
-      setCurrentNode(currentDoc.body);
-      setBrowseMode(WA.READ);
-      break;
-    case 'ctrl shift r':  // Allow reloads.
-    case 'ctrl shift tab':  // Allow switching forward tabs.
-    case 'ctrl tab':  // Allow switching back tabs.
-      break;
-    default:
-      default_case = true;
-      break;
-    }
-*/
   
     var select_chosen = false;
   
@@ -380,7 +104,6 @@ WA.Keyboard = {
         this.suppressSelect(e, target, false);    	
       }
   
-      WA.Utils.recordLine('return from select: ' + default_case);
     }
   
     if(default_case) {
@@ -447,10 +170,6 @@ WA.Keyboard = {
   
 
     return return_val;
-  },
-
-  // Records an observation for use by the Markov-model-based prefetcher.
-  recordObservation: function(key_string, new_node, old_node) {
   },
 
   // Returns a string representation of the provided key event.

@@ -1,5 +1,5 @@
 var prevPage = null;
-var curPage = $('#location').val();
+var curPage = $('#content_frame').contents()[0].location.href;
 
 $(document).ready( function() {
 
@@ -22,8 +22,10 @@ function loadInit() {
     processInputEv(ev);
   });
 
+
   // Handle focus change events
   // TODO.
+
 
   // Handle page loads
   $('#content_frame').bind('beforeunload', function() {
@@ -55,6 +57,9 @@ function processPageLoadEv() {
   curPage = $('#content_frame').contents()[0].location.href;
   console.log("Page changed from: " + prevPage + " --> " + curPage);
 }
+
 function processPageUnloadEv() {
   alert("UNLOAD!!");
 }
+
+

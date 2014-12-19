@@ -137,13 +137,9 @@ echo $script_path;
 <span id="test_div"></span>
 </div>
 <div <?php if($_REQUEST[debug] === 'true') { echo 'style="visibility: hidden;"'; } else { echo 'style="visibility: hidden"'; }?>><span id="debug_div"></span></div>
+
 <?php if($_REQUEST[debug]==='true') { ?>
-<p>
-<form name="recorder_form" method="post" action="recorder.php"><br/>
-<input name="submit" type="submit" value="submit">
-<textarea id="recording" name="recording" rows="30" cols="150"></textarea>
-</form>
-</p>
+
 <?php } ?>
 </body>
 </html>

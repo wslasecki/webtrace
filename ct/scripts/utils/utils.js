@@ -38,33 +38,12 @@ WA.Utils = {
   },
 
   /**
-   * Returns a reference to the textarea used for recording messages.
-   * @return Reference to textarea used for recording messages.
-   */
-  getRecordingTextarea: function() {
-    var doc = getNavigationDocument();
-    var rta = doc.getElementById('recording');
-    return rta;
-  },
-
-  /**
    * Returns the current time.
    * @return The current time.
    */
   getTime: function() {
     var d = new Date();
     return d.valueOf();
-  },
-
-  /**
-   * Add the text of the parameter line to the recording textarea.
-   * @param line String to record in the recording text area.
-   */
-  recordLine: function(line) {
-    if(recordActions) {
-      var rta = this.getRecordingTextarea();
-      rta.value += this.getTime() + " " + line + "\n";
-    }
   },
 
   /**
