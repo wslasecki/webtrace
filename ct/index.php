@@ -37,7 +37,7 @@ $start_url = (isset($_REQUEST['starting_url']) ? base64_encode($_REQUEST['starti
 $start_url = str_replace('$url', $start_url, $wp_path);
 
   // WSL: Imported from locale
- // echo "<script type='text/javascript'>function wa_gettext(text) { return text; }</script>";
+  // echo "<script type='text/javascript'>function wa_gettext(text) { return text; }</script>";
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
  "http://www.w3.org/TR/html4/strict.dtd">

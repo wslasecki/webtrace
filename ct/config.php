@@ -16,7 +16,7 @@
   $webanywhere_domain = 'localhost';
 
   // The relative path to WebAnywhere on the web server.
-  $root_path = '/walter/proxy/ct';
+  $root_path = '/walter/webtrace/ct';
 
   // The path to the script minimizer code.
   $min_script_path = $root_path . '/min';
