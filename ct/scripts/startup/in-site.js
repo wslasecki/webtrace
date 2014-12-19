@@ -14,19 +14,6 @@ WA.start = function() {
     else if(window.addEventListener) document.addEventListener('keydown', keydown_func, false);
   };
 
-  soundManager.onload = function() {
-    WA.Utils.log("soundManager loaded");
-
-    // soundManager 2 should be ready to use/call at this point.
-    WA.Sound.soundPlayerLoaded = true;
-    top.soundPlayerLoaded = true;
-
-    WA.Sound.playSound(WA.inSiteInit, false);
-  };
-
-  // Initialize sounds to get things rolling.
-  WA.Sound.initSound();
-
   if(window.attachEvent) window.attachEvent('onload', onload);
   else if(window.addEventListener) window.addEventListener('load', onload, false);
 

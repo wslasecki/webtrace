@@ -35,13 +35,6 @@ WA.Extensions.RecorderExtension = function() {
     this.recordEvent("l(" + (this._seq++) + ")" + WA.Interface.getURLFromProxiedDoc(doc));
   };
 
-  // Record when a sound finishes.
-  // We do not record the sid of the finishing sound.
-  this.soundFinished = function(sid, percent) {
-    this.recordEvent("sf(" + (this._seq++) + ")" + percent + "," + this._lastSpotlight + "," + sid);
-    this._lastSpotlight = "";
-  };
-
   // Generic reset.
   this.reset = function() {};
 };
@@ -52,7 +45,6 @@ WA.Extensions.RecorderExtension = function() {
 
   WA.Extensions.oncePerDocument.push(recorderExtension);
   WA.Extensions.nodeSpotlighters.push(recorderExtension);
-  WA.Extensions.soundFinishers.push(recorderExtension);
 
   WA.Extensions.extensionList.push(recorderExtension);
 })();

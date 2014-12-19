@@ -54,12 +54,6 @@ WA.Extensions.AriaExtension = function() {
       if(anode.value != node.innerHTML) {
         WA.Utils.log("LIVE CHANGE");
         anode.value = node.innerHTML;
-
-        // This will need to change based on the live politeness value.
-        if(live == "rude") {
-          WA.Sound.silenceAll();
-        }
-        WA.Sound.addSound(WA.Nodes.getTextContent(node));
       }
     } else {
       WA.Utils.log("NO LIVE CHANGE");

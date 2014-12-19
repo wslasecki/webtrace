@@ -9,8 +9,6 @@ WA.Extensions.SelectionReadingExtension = function() {
     var text = WA.Utils.trim(WA.Utils.getSelection(doc));
     if(text.length > 0) {
       // Speak the text.
-      WA.Sound.resetSounds();
-      WA.Sound.addSound(text);
     }
   };
 

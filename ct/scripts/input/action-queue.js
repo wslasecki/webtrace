@@ -32,7 +32,6 @@ WA.Keyboard.ActionQueue = new (function() {
   	var target = {};
 
     setBrowseMode(WA.KEYBOARD);
-    WA.Sound.resetSounds();
 
     WA.Utils.log("EVENT: " + event.command + " " + event.source + " " + WA.browseMode);
 

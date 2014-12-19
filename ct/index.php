@@ -130,16 +130,6 @@ $scripts =
         'startup/start.js'
         );
 
-/*
-// Depending on the type of sound player used, include the appropriate
-// set of routines for playing sounds.
-if(isset($_REQUEST['embed']) && $_REQUEST['embed']==='true') {
-  array_unshift($scripts, 'sound/sound_embed.js');
-} else {
-  array_unshift($scripts, 'sound/soundmanager2.js');
-}
-*/
-
 // Add in any system-defined extensions.
 foreach($extensions as $extension_path) {
   array_push($scripts, $extension_path);

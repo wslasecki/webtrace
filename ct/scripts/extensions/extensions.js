@@ -25,9 +25,6 @@ WA.Extensions = {
   // Functions that need to be called periodically.
   periodicFunctions: new Array(),
 
-  // Functions that get called when a sound finishes.
-  soundFinishers: new Array(),
-
   // List of all extensions.
   extensionList: new Array(),
 
@@ -110,19 +107,6 @@ WA.Extensions = {
     for(var i=0; i<num; i++) {
       this.nodePreprocessors[i].preprocess(node);
     }
-  },
-
-  /**
-   * Fired when sound finishes.
-   * @param sound_id ID of the sound that just finished.
-   * @param percent Percentage of sound down (0.0 to 1.0)
-   */
-  soundFinished: function(sid, percent) {
-    // Call the soundFinished function on each defined soundFinished extensions.
-    var num = this.soundFinishers.length;
-    for(var i=0; i<num; i++) {
-      this.soundFinishers[i].soundFinished(sid, percent);
-    }    
   },
 
   resetExtensions: function() {

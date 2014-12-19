@@ -334,65 +334,6 @@ WA.Extensions.WebTrax = function() {
     //WA.Extensions.WebTrax.trace2.push({ node: node });
   };
   
-  this.soundFinished = function(sid, percent){
-    //WA.Extensions.WebTrax.trace.push([WA.Extensions.RecorderExtension._lastSpotlight, percent]);
-    
-    if(true || WA.Extensions.WebTrax.recordMode == 'heatmap'){
-      var i = 0;
-      for(i = 0; i < WA.Extensions.WebTrax.trace.length; i++){
-        var cur = WA.Extensions.WebTrax.trace[i];
-        if(cur.node == WA.Extensions.WebTrax.currentHLNode){
-          //alert('matching finished node, ' + percent);
-          cur.partial = true;
-          cur.percent = percent;
-          
-          // send node info to DB
-
-          var percentFill = 0;
-          if(cur.partial){
-            percentFill = percent;
-          } else {
-            percentFill = 0;
-          }
-
-          if(cur.node){
-            
-            var rect;
-            if(cur.node.nodeName == 'SPAN'){
-              rect = cur.node.getClientRects()[0];
-            } else {
-              rect = cur.node.getBoundingClientRect();
-            }
-            
-            var contentDoc = document.getElementById('content_frame').contentDocument;
-            contentDoc = contentDoc ? contentDoc : document.frames['content_frame'].document;
-            
-            WA.Extensions.WebTrax.recordQueue.push({
-              uri: WA.Interface.getURLFromProxiedDoc(contentDoc),
-              xpath: WA.Utils.getXPath(cur.node),
-              completeness: percentFill,
-              sessionid: top.sessionid + WA.Extensions.WebTrax.random.toString(),
-              time: (new Date().getTime() - WA.Extensions.WebTrax.pageStart),
-              type: 'readElement',
-              keycode: 0,
-              text: cur.node.textContent,
-              x: parseInt(rect.left),
-              y: parseInt(rect.top),
-              width: parseInt(rect.width),
-              height: parseInt(rect.height),
-              pagenum: WA.Extensions.WebTrax.pagenum
-            });
-            
-            if(WA.Extensions.WebTrax.recordQueue.length >= 5){
-              this.sendQueue();
-            }
-            
-          }
-        }
-      }
-    }
-  };
-  
   this.sendQueue = function(){
     var queue = WA.Extensions.WebTrax.recordQueue;
     if(queue.length > 0){
@@ -459,7 +400,6 @@ WA.Extensions.WebTrax = function() {
   var trax = new WA.Extensions.WebTrax();
   
   WA.Extensions.nodeSpotlighters.push(trax);
-  WA.Extensions.soundFinishers.push(trax);
   WA.Extensions.oncePerDocument.push(trax);
   
   // Add this extension to the general list of extensions.

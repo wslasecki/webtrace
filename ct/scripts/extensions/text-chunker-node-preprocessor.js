@@ -130,8 +130,5 @@ WA.Extensions.TextChunkerNodePreprocessor = function() {
   }
 };
 
-// Remove the current sound splitter.
-//WA.Sound.splitSoundsByBoundary = function(str) { return [str + ""]; }
-
 // Add this extension to the node preprocessor extensions.
 WA.Extensions.nodePreprocessors.push(new WA.Extensions.TextChunkerNodePreprocessor());

@@ -9,17 +9,10 @@
  */
 
 WA.Nodes = {
-  // Should node type identifiers and the node text be broken apart?
-  // This has benefits for caching.
-  _breakUpSound: false,
-
-  // Break-up delimiter.
-  _breakUpSoundDelimiter: " || ",
-
   // This string is inserted between the type of the node and the text for
   // the node, when applicable.  For instance, this string will be placed
   // between "Image" and the alt text for that image.
-  nodeTypeBreaker: (this._breakUpSound ? this._breakUpSoundDelimiter : ""),
+//  nodeTypeBreaker: (this._breakUpSound ? this._breakUpSoundDelimiter : ""),
   
   // Recursion limit.
   // TODO: remove 20 level "fudge factor"
