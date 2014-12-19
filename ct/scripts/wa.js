@@ -90,13 +90,6 @@ function init_browser() {
     else if(window.addEventListener) find_next.addEventListener('focus', browserElementFocus, false);
   }
 
-  // Find previous focus.
-  var find_previous = document.getElementById('find_previous_button');
-  if(find_previous) {
-    if(window.attachEvent) find_previous.attachEvent('onfocus', browserElementFocus);
-    else if(window.addEventListener) find_previous.addEventListener('focus', browserElementFocus, false);
-  }
-
   // Window-level key event handlers.
   // Event handlers also attached in newPage to catch events
   // when content is focused.

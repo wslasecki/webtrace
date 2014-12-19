@@ -229,10 +229,7 @@ echo $script_path;
 	                    <input class="inputbox" type="text" name="finder_field" id="wa_finder_field"/>
 	                </td>
 	                <td>
-	                    <input class="inputbutton" id="find_next_button" name="find_next_button" type="button" value="<?php echo wa_gettext('Next') ?>" onclick='nextNodeContentFinder(this); return false;'/>
-	                </td>
-	                <td>
-	                    <input class="inputbutton" id="find_previous_button" name="find_previous_button" type="button" value="<?php echo wa_gettext('Previous') ?>" onclick='prevNodeContentFinder(this); return false;'/>
+	                    <input class="inputbutton" id="find_next_button" name="find_next_button" type="button" value="<?php echo wa_gettext('Exec') ?>" onclick='nextNodeContentFinder(this); return false;'/>
 	                </td>
 	              </form>
 	            </tr>
